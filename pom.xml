@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>pokedex-ap</artifactId>
+	<artifactId>pokedex-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pokedex-ap</name>
+	<name>pokedex-api</name>
 	<description>Pokedex Api</description>
 	<url/>
 	<licenses>
