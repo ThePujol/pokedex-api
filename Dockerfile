@@ -11,7 +11,7 @@ RUN mvn clean package -DskipTests
 
 # Estágio 2: Run (Execução)
 # MUDANÇA: Usando uma imagem JRE (Java Runtime) 21 para rodar o app
-FROM openjdk:21-jre-slim
+FROM openjdk:21-slim
 
 # Expõe a porta 8080 (a porta que o Spring Boot usa)
 EXPOSE 8080
