@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Objects;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @RestController
@@ -118,5 +120,28 @@ public class PokemonController {
     @GetMapping("/pokemon/habilidade/{habilidade}")
     public ResponseEntity<List<Pokemon>> getPokemonByAbility(@PathVariable String habilidade) {
         return ResponseEntity.ok(pokemonRepository.findByHabilidade(habilidade));
+    }
+
+     // --- Endpoints to get all distinct tipos and habilidades ---
+    // GET /api/pokemon/tipos
+    @GetMapping("/pokemon/tipos")
+    public ResponseEntity<List<String>> getAllTipos() {
+        List<String> tipos = pokemonRepository.findAll().stream()
+                .map(Pokemon::getTipo)
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(tipos);
+    }
+
+    // GET /api/pokemon/habilidades
+    @GetMapping("/pokemon/habilidades")
+    public ResponseEntity<List<String>> getAllHabilidades() {
+        List<String> habilidades = pokemonRepository.findAll().stream()
+                .flatMap(p -> Optional.ofNullable(p.getHabilidades()).orElse(Collections.emptyList()).stream())
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(habilidades);
     }
 }
